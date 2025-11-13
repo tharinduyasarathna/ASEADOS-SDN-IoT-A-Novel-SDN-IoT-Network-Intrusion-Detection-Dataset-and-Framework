@@ -1,0 +1,2 @@
+# ASEADOS-SDN-IoT-A-Novel-SDN-IoT-Network-Intrusion-Detection-Dataset-and-Framework
+ASEADOS–SDN–IoT, a novel and publicly available intrusion detection dataset supported by a fully documented hybrid testbed framework. The resulting dataset contains 457,044 labeled flow instances with 83 statistical features and was evaluated using state-of-the-art machine learning (ML) and deep learning (DL) techniques.
