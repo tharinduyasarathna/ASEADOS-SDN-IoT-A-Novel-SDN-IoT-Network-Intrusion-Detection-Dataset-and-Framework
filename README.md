@@ -1,119 +1,100 @@
-# ASEADOS-SDN-IoT-A-Novel-SDN-IoT-Network-Intrusion-Detection-Dataset-and-Framework
-ASEADOS–SDN–IoT, a novel and publicly available intrusion detection dataset supported by a fully documented hybrid testbed framework. The resulting dataset contains 457,044 labeled flow instances with 83 statistical features and was evaluated using state-of-the-art machine learning (ML) and deep learning (DL) techniques.
 
+# ASEADOS-SDN-IoT: A Novel SDN–IoT Intrusion Detection Dataset and Testbed Framework
 
+## Overview
+ASEADOS–SDN–IoT is a publicly available and fully documented intrusion detection dataset built from a hybrid SDN–IoT testbed integrating physical IoT devices, virtual nodes, multi-segment routing, and ONOS controller telemetry.  
+It contains **457,044 labeled flows** with **84 statistical features**, capturing both benign traffic and four major attack classes: **DoS, DDoS, Botnet, and Probe**.
 
-# ASEADOS-SDN-IoT Testbed & Dataset Reproduction Guide
+## Key Features
+- Hybrid SDN–IoT testbed with physical Raspberry Pi devices and virtual IoT sensors.
+- Integrated ONOS telemetry (packet-in, flow-mod, topology updates).
+- Time‑synchronized PCAP captures across SDN controller, IoT devices, and VMs.
+- Flow-based dataset generated using CICFlowMeter.
+- Fully labeled multi-class dataset supporting ML/DL intrusion detection.
 
-This README consolidates the entire SDN–IoT testbed setup, architecture, and dataset-generation methodology based on the ASEADOS-SDN-IoT paper.
+## Testbed Architecture
+- **Physical IoT devices**: Raspberry Pi boards, Amazon Echo Show, Echo Dot.
+- **Virtual IoT nodes**: Flask/Python-based sensors (temperature, humidity, pressure, light, motion).
+- **SDN Infrastructure**: ONOS controller + OVS with 5 logical bridges.
+- **Attack VMs**: Kali Linux, Metasploitable2.
+- **Hybrid Layer 2/Layer 3 routing** for cross-subnet communication.
 
-## 1. Background
+## Dataset Composition
+### Traffic Classes
+- **Benign**: IoT telemetry, service traffic (HTTP/HTTPS, FTP, DNS, SSH)
+- **DoS** attacks (HULK, LOIC, Slowloris)
+- **DDoS** attacks (Hping3 SYN/UDP/ICMP floods)
+- **Botnet** activity (BoNeSI)
+- **Probe** scans (Nmap, Metasploit reconnaissance/exploitation)
 
-The ASEADOS-SDN-IoT dataset was created to address limitations in previous SDN intrusion datasets by integrating realistic IoT traffic, multi-segment routing, modern cyberattacks, and SDN controller telemetry.
+### Labeled Flow Distribution
+| Class | Flows | % |
+|-------|-------|-----|
+| Benign | 260,797 | 57.06 |
+| DoS | 127,772 | 27.96 |
+| DDoS | 51,465 | 11.26 |
+| Bot | 9,090 | 1.99 |
+| Probe | 7,920 | 1.73 |
+| **Total** | **457,044** | **100%** |
 
-## 2. High-Level Architecture
+## Feature Set
+Flows were extracted using CICFlowMeter, producing **84 numerical features**, including:
+- Packet/byte statistics  
+- Inter-arrival times  
+- TCP flag counts  
+- Active/idle times  
+- Throughput metrics  
 
-The system includes:
-- VM2: Ubuntu 16.04 with OVS, Mininet, DVWA (Docker)
-- VM4: ONOS SDN Controller
-- VM1: Kali Linux attack host
-- VM3: Metasploitable2 vulnerable server
-- Virtual IoT devices simulated via Mininet
+After cleaning, **64 core features** remain for modeling.
 
-## 3. Components
+## Data Preprocessing Pipeline
+- Removal of duplicates, incomplete flows, zero-duration sessions.
+- Feature refinement to remove low-variance/multicollinearity attributes.
+- Outlier clipping on durations, counts, throughput.
+- Min–Max normalization.
+- Label encoding:  
+  - `0 = Benign`, `1 = DoS`, `2 = DDoS`, `3 = Botnet`, `4 = Probe`
+- 80/20 training-testing split (stratified).
 
-- ONOS for flow control
-- OVS Layer-2/Layer-3 switching
-- DVWA and Metasploitable2 as attack targets
-- Kali for generating multiple attack types
-- Mininet to emulate IoT devices and sensor traffic
+## Attack Scenarios
+### DoS
+High-rate floods targeting IoT nodes, SDN switches, or services.
 
-## 4. VM Setup Instructions
+### DDoS
+Distributed floods involving multiple nodes with synchronized multi-protocol attacks.
 
-### VM2 – OVS, Mininet, Docker, DVWA
-System updates:
-```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
-```
-Install OVS/Mininet:
-```
-sudo apt-get install openvswitch-switch mininet
-sudo ufw disable
-```
-Docker installation and DVWA:
-```
-docker run --rm -it -p 8080:80 vulnerables/web-dvwa
-```
+### Botnet
+BoNeSI-driven beaconing + surge attacks to simulate real C2 behavior.
 
-### VM4 – ONOS Controller
-Install Java, dependencies, and ONOS package.  
-Enable ONOS service and access GUI at:
-```
-http://127.0.0.1:8181/onos/ui
-```
+### Probe/Exploitation
+Nmap scans + Metasploit exploitation lifecycle traffic.
 
-### VM1 – Kali Linux
-Configure IP, generate attacks (Nmap, Hydra, Metasploit, Slowloris, etc.)
+## Research Applications
+- Machine Learning & Deep Learning IDS evaluation
+- Cross-plane correlation of ONOS telemetry with IoT traffic
+- Time-series modeling
+- SDN controller stress testing
+- Behavioral profiling of IoT ecosystems
 
-### VM3 – Metasploitable2
-Default login: `msfadmin / msfadmin`
+## Limitations
+- Single-controller (ONOS) environment.
+- Four attack categories (future expansion expected).
+- No application-layer payload features (privacy-focused).
 
-## 5. OVS Layer-3 Routing
+## Future Work
+- Multi-controller SDN architectures.
+- Expanded IoT diversity and larger topologies.
+- Inclusion of encrypted traffic fingerprints.
+- Emerging AI-driven, multi-stage attacks.
+- Explainable and graph-based IDS frameworks.
 
-Multi-segment routing between:
-- 200.175.2.0/24
-- 192.168.3.0/24
-- 192.168.8.0/24
-- 192.168.20.0/24
+---
 
-Bridges:
-```
-br1 – external / attack network
-br2 – vulnerable server network
-s1  – IoT subnet
-```
+## Citation
+If you use ASEADOS–SDN–IoT, please cite the corresponding publication.
 
-## 6. Mininet IoT Simulation
+---
 
-IoT devices:
-- h1–h4
-- Each configured with default gateway of 192.168.20.129
-
-Startup:
-```
-sudo python topology.py
-```
-
-## 7. Dataset Generation Flow
-
-ASEADOS-SDN-IoT follows:
-1. Benign IoT traffic generation
-2. Attack injection (DoS, scans, brute force, exploitation)
-3. ONOS OpenFlow telemetry capture
-4. `tcpdump` packet capture
-5. Labeling by attack class
-
-## 8. Attack Scenarios
-
-ASEADOS covers:
-- Reconnaissance
-- DoS/DDoS
-- Web exploitation (DVWA)
-- Brute force
-- OS exploitation
-- Spoofing/MITM
-- IoT-targeted attacks
-- Malware-like sessions
-
-## 9. Traffic Capture
-
-Captured via:
-- tcpdump on OVS bridges
-- host-level packet captures
-- ONOS controller logs
-
-## 10. Citation
-If using this environment or dataset, cite the ASEADOS-SDN-IoT paper.
+## Dataset & Code Access
+Dataset, scripts, and instructions are available in this repository. Additional PCAPs and ONOS logs may be provided upon request.
 
