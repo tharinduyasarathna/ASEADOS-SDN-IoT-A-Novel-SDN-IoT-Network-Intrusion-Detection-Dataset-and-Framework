@@ -5,13 +5,6 @@
 ASEADOS–SDN–IoT is a publicly available and fully documented intrusion detection dataset built from a hybrid SDN–IoT testbed integrating physical IoT devices, virtual nodes, multi-segment routing, and ONOS controller telemetry.  
 It contains **457,044 labeled flows** with **84 statistical features**, capturing both benign traffic and four major attack classes: **DoS, DDoS, Botnet, and Probe**.
 
-## Key Features
-- Hybrid SDN–IoT testbed with physical Raspberry Pi devices and virtual IoT sensors.
-- Integrated ONOS telemetry (packet-in, flow-mod, topology updates).
-- Time‑synchronized PCAP captures across SDN controller, IoT devices, and VMs.
-- Flow-based dataset generated using CICFlowMeter.
-- Fully labeled multi-class dataset supporting ML/DL intrusion detection.
-
 ## Testbed Architecture
 - **Physical IoT devices**: Raspberry Pi boards, Amazon Echo Show, Echo Dot.
 - **Virtual IoT nodes**: Flask/Python-based sensors (temperature, humidity, pressure, light, motion).
@@ -58,35 +51,6 @@ sudo apt-get dist-upgrade
 sudo apt-get install openvswitch-switch mininet
 sudo ufw disable
 ```
-
-### 3. Install Docker + DVWA
-```
-sudo apt-get install ca-certificates curl gnupg lsb-release
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker
-```
-
-Add Docker repo:
-```
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-Install:
-```
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-docker run hello-world
-```
-
-Run DVWA:
-```
-docker run --rm -it -p 8080:80 vulnerables/web-dvwa
-```
-
-Credentials:  
-**admin / password**
-
----
 
 # 🖥️ **VM4 — ONOS Controller Setup**
 
