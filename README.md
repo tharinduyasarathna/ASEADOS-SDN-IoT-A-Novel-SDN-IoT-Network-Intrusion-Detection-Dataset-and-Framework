@@ -2,18 +2,18 @@
 # ASEADOS-SDN-IoT: A Novel SDN–IoT Intrusion Detection Dataset and Testbed Framework
 
 ## Overview
-ASEADOS–SDN–IoT is a publicly available and fully documented intrusion detection dataset built from a hybrid SDN–IoT testbed integrating physical IoT devices, virtual nodes, multi-segment routing, and ONOS controller telemetry.  
-It contains **457,044 labeled flows** with **84 statistical features**, capturing both benign traffic and four major attack classes: **DoS, DDoS, Botnet, and Probe**.
+ASEADOS–SDN–IoT is a publicly available, fully documented intrusion detection dataset built from a hybrid SDN–IoT testbed that integrates physical IoT devices, virtual nodes, multi-segment routing, and ONOS controller telemetry.  
+It contains **457,044 labelled flows** with **83 statistical features**, capturing both benign traffic and four major attack classes: **DoS, DDoS, Botnet, and Probe**.
 
 ## Key Features
 - Hybrid SDN–IoT testbed with physical Raspberry Pi devices and virtual IoT sensors.
 - Integrated ONOS telemetry (packet-in, flow-mod, topology updates).
-- Time‑synchronized PCAP captures across SDN controller, IoT devices, and VMs.
+- Time-synchronised PCAP captures across SDN controller, IoT devices, and VMs.
 - Flow-based dataset generated using CICFlowMeter.
-- Fully labeled multi-class dataset supporting ML/DL intrusion detection.
+- Fully labelled multi-class dataset supporting ML/DL intrusion detection.
 
 ## Testbed Architecture
-- **Physical IoT devices**: Raspberry Pi boards, Amazon Echo Show, Echo Dot.
+- **Physical IoT devices**: Raspberry Pi boards, Amazon Echo Show, and Echo Dot.
 - **Virtual IoT nodes**: Flask/Python-based sensors (temperature, humidity, pressure, light, motion).
 - **SDN Infrastructure**: ONOS controller + OVS with 5 logical bridges.
 - **Attack VMs**: Kali Linux, Metasploitable2.
@@ -38,7 +38,7 @@ It contains **457,044 labeled flows** with **84 statistical features**, capturin
 | **Total** | **457,044** | **100%** |
 
 ## Feature Set
-Flows were extracted using CICFlowMeter, producing **84 numerical features**, including:
+Flows were extracted using CICFlowMeter, producing **83 numerical features**, including:
 - Packet/byte statistics  
 - Inter-arrival times  
 - TCP flag counts  
