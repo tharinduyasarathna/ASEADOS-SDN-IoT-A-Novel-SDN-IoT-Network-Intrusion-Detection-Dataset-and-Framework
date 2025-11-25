@@ -37,7 +37,7 @@ It includes VM configuration, ONOS installation, OVS routing, Mininet IoT topolo
 
 ---
 
-# 🖥️ **VM2 — Ubuntu 16.04 (OVS + Mininet + Docker DVWA)**
+# 🖥️ **VM2 — Ubuntu 16.04 (OVS + Mininet + Flask)**
 
 ### 1. Update Packages
 ```
@@ -100,7 +100,7 @@ sudo ifconfig eth1 200.175.2.130/24 up
 sudo ip route add default via 200.175.2.129
 ```
 
-Tools used in dataset:
+Tools used in the dataset:
 - Nmap  
 - Hydra  
 - Slowloris  
