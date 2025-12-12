@@ -1,5 +1,7 @@
 # ASEADOS-SDN-IoT: A Novel SDN–IoT Intrusion Detection Dataset and Testbed Framework
 
+## Dataset will release soon!!!
+
 ## Overview
 ASEADOS–SDN–IoT is a publicly available and fully documented intrusion detection dataset built from a hybrid SDN–IoT testbed integrating physical IoT devices, virtual nodes, multi-segment routing, and ONOS controller telemetry. It contains **457,044 labeled flows** with **83 statistical features**, capturing both benign traffic and four major attack classes: **DoS, DDoS, Botnet, and Probe**.
 
