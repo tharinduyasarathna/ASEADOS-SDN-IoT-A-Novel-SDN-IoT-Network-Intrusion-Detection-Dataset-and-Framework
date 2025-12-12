@@ -1,6 +1,3 @@
-# Draft Version (Full document will be avilable by next week)
-
-
 # ASEADOS-SDN-IoT: A Novel SDN–IoT Intrusion Detection Dataset and Testbed Framework
 
 ## Overview
