@@ -131,6 +131,16 @@ sudo ip route add default via 192.168.3.129
 ```
 
 ------------------------------------------------------------------------
+# 📡 Raspberry Pi Configuration as Wireless Access Point (WAP)
+
+In the ASEADOS-SDN-IoT testbed, a Raspberry Pi running Raspbian OS is configured as a Wireless Access Point (WAP) to connect physical IoT devices (e.g., Raspberry Pi sensors, Amazon Echo devices) to the SDN-controlled network. This enables a hybrid IoT environment that combines physical and virtual IoT nodes, as described in the ASEADOS-SDN-IoT framework. Use the link below to set up this configuration.
+
+``` bash
+# Follow the « setting up a routed wireless access point » part of this link :
+https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-routed-wireless-access-point
+
+```
+------------------------------------------------------------------------
 
 # 🔀 OVS & Network Configuration (VM2)
 
