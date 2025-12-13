@@ -35,8 +35,6 @@ ASEADOS–SDN–IoT is a publicly available and fully documented intrusion detec
 This section provides the full SDN–IoT testbed setup used to generate the ASEADOS–SDN–IoT dataset.  
 It includes VM configuration, ONOS installation, OVS routing, Mininet IoT topology, and attack machine setup.
 
----
-
 ------------------------------------------------------------------------
 
 # 🖥️ VM2 --- Ubuntu 18.04 (OVS + Mininet + Flask)
